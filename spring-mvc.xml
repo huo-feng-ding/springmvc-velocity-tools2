@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+	
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/pages/" />
+	    <property name="velocityProperties">
+	        <props>
+	        	<prop key="file.resource.loader.cache">true</prop>
+	            <prop key="input.encoding">UTF-8</prop>
+	            <prop key="output.encoding">UTF-8</prop>
+	            <prop key="eventhandler.referenceinsertion.class">com.duxiu.modules.velocity.event.EscapeHtmlReference</prop>
+	            <prop key="velocimacro.permissions.allow.inline.local.scope">true</prop>
+	        </props>
+	    </property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="viewClass" value="com.duxiu.modules.velocity.VelocityToolboxView" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+       	<property name="toolboxConfigLocation" value="/velocity-toolbox.xml" />
+		<property name="cache" value="true"/>
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".vm" />
+	</bean>
+	
+</beans>
